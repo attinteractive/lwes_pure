@@ -1,6 +1,49 @@
 = lwes_pure
 
-Description goes here.
+LWES - Light Weight Event System protocol implemented in pure ruby. The original lwes gem is a thin wrapper around the c library, and does not handle data types for dynamic LWES events. This gem allows users to define the data type of attributes in an clear way, so that your LWES event listeners will be happy. This library includes the following components:
+
+* `Lwes::Event` for reading from and writing to `IO` objects.
+* `Lwes::Emitter` for emitting LWES events through UDP socket.
+
+== Installation
+
+  gem install lwes_pure
+  
+== Initialization
+
+If only `Lwes::Event` is needed, require like this:
+
+  require 'lwes/event'
+
+If both `Lwes::Event` and `Lwes::Emitter` are needed, require like this:
+
+  require 'lwes'
+  
+== Usage
+
+Here is a short example to create an event and send it off using udp
+
+  # requiring lwes_pure gem
+  require 'lwes'
+  
+  # create a LWES emitter
+  emitter = Lwes::Emitter.new({
+    :host => "127.0.0.1",
+    :port => "12345"
+  })
+  
+  # create a LWES event with 3 attributes of type int16, string, and ip array
+  event = Lwes::Event.new({
+    :name => "Test::Event",
+    :attributes => {
+      'int_attribute' => [:int16, 123],
+      'string_attribute' => [:attr_str, "test string"],
+      'ip_attribute' => [:ip_v4_array, ["1.2.3.4", "5.6.7.8", "192.168.0.255"]]
+    }
+  })
+  
+  # send it off with the emitter
+  emitter.emit event
 
 == Contributing to lwes_pure
  
