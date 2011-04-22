@@ -1,4 +1,7 @@
 require 'bindata'
+require 'lwes/types'
+require 'lwes/helpers'
+require 'lwes/serialization'
 
 module Lwes
   class Event

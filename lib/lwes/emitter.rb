@@ -1,3 +1,5 @@
+require 'socket'
+
 module Lwes
   class Emitter
     DEFAULT_SOCIKET_OPTIONS = {

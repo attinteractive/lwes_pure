@@ -1,7 +1,2 @@
-require 'socket'
-require 'bindata'
-require 'lwes/types'
-require 'lwes/helpers'
-require 'lwes/serialization'
 require 'lwes/event'
 require 'lwes/emitter'
