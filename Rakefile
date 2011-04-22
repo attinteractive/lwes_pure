@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "lwes_pure"
   gem.homepage = "http://github.com/aq1018/lwes_pure"
   gem.license = "MIT"
-  gem.summary = %Q{lwes implementation in pure ruby}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{LWES - Light Weight Event System protocol implemented in pure ruby.}
+  gem.description = %Q{The original lwes gem is a thin wrapper around the c library, and does not handle data types for dynamic LWES events. This gem allows users to define the data type of attributes in an clear way, so that your LWES event listeners will be happy. This library includes the following components.}
   gem.email = "aqian@attinteractive.com"
   gem.authors = ["Aaron Qian"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
