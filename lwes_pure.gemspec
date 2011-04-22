@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{lwes_pure}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aaron Qian"]
   s.date = %q{2011-04-21}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{The original lwes gem is a thin wrapper around the c library, and does not handle data types for dynamic LWES events. This gem allows users to define the data type of attributes in an clear way, so that your LWES event listeners will be happy. This library includes the following components.}
   s.email = %q{aqian@attinteractive.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "lib/lwes/helpers.rb",
     "lib/lwes/serialization.rb",
     "lib/lwes/types.rb",
+    "lwes_pure.gemspec",
     "spec/data/lwes.bin",
     "spec/lwes_spec.rb",
     "spec/serialiation_spec.rb",
@@ -40,7 +41,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
-  s.summary = %q{lwes implementation in pure ruby}
+  s.summary = %q{LWES - Light Weight Event System protocol implemented in pure ruby.}
   s.test_files = [
     "spec/lwes_spec.rb",
     "spec/serialiation_spec.rb",
