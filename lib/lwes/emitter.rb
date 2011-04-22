@@ -12,8 +12,8 @@ module Lwes
 
     def initialize(options={})
       self.socket_options = DEFAULT_SOCIKET_OPTIONS.merge(options)
-      self.socket = UDPSocket.new(socket_options[:address_family])
-      socket.connect(socket_options[:host], socket_options[:port])
+      self.socket = UDPSocket.new(@socket_options[:address_family])
+      socket.connect(@socket_options[:host], @socket_options[:port])
     end
 
     def emit(event)

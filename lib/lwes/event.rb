@@ -11,12 +11,12 @@ module Lwes
       self.attributes = hash[:attributes] || {}
     end
     
-    def name=(v)
-      @name = v
+    def name=(val)
+      @name = val
     end
 
-    def attributes=(v)
-      @attributes = v
+    def attributes=(val)
+      @attributes = val
     end
     
     def write(io)
@@ -30,9 +30,9 @@ module Lwes
     end
     
     def self.read(io)
-      e = new
-      e.read(io)
-      e
+      event = new
+      event.read(io)
+      event
     end
     
     def to_hash
@@ -48,22 +48,22 @@ module Lwes
     end
 
     def attributes_to_serializer
-      attributes.collect do |k, v|
-        [ k, v[0], v[1] ]
+      attributes.collect do |key, value|
+        [ key, value[0], value[1] ]
       end
     end
     
     def set_attributes_from_serializer(serializer)
       @name = serializer.name
-      @attributes = serializer.attributes.inject({}) do |h, attribute|
-        k, t, v = *attribute
+      @attributes = serializer.attributes.inject({}) do |hash, attribute|
+        key, vtype, value = *attribute
         # convert to real string
-        k = k.to_s
+        key = key.to_s
         # convert BinData types to actual types
-        v = v.value
+        value = value.value
 
-        h[k] = [t, v]
-        h
+        hash[key] = [vtype, value]
+        hash
       end
     end
   end

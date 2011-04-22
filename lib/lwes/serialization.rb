@@ -32,8 +32,8 @@ module Lwes
         self.data
       end
       
-      def set(v)
-        self.data = v
+      def set(val)
+        self.data = val
       end
     end
 
@@ -43,7 +43,7 @@ module Lwes
       string :data, :initial_value => lambda { value }, :read_length => :len
 
       def get;   self.data;     end
-      def set(v) self.data = v; end
+      def set(val) self.data = val; end
     end
 
     class IpAddr < BinData::Primitive
@@ -51,7 +51,7 @@ module Lwes
       uint32 :data, :initial_value => lambda { ip_to_int32(value) }
       
       def ip_to_int32(str)
-        ary = str.to_s.split(".").collect{ |b| b.to_i }.slice(0,4)
+        ary = str.to_s.split(".").collect{ |byte| byte.to_i }.slice(0,4)
         ((ary[3] & 0xff) << 24) + ((ary[2] & 0xff) << 16) + ((ary[1] & 0xff) << 8) + (ary[0] & 0xff)
       end
       
@@ -70,8 +70,8 @@ module Lwes
         self.int32_to_ip(self.data)
       end
       
-      def set(v)
-        self.data = ip_to_int32(v)
+      def set(val)
+        self.data = ip_to_int32(val)
       end
     end
 
@@ -80,7 +80,7 @@ module Lwes
       uint32 :data, :initial_value => lambda { ip_to_int32(value) }
       
       def ip_to_int32(str)
-        ary = str.to_s.split(".").collect{ |b| b.to_i }.slice(0,4)
+        ary = str.to_s.split(".").collect{ |byte| byte.to_i }.slice(0,4)
         ((ary[3] & 0xff) << 24) + ((ary[2] & 0xff) << 16) + ((ary[1] & 0xff) << 8) + (ary[0] & 0xff)
       end
       
@@ -99,8 +99,8 @@ module Lwes
         self.int32_to_ip(self.data)
       end
       
-      def set(v)
-        self.data = ip_to_int32(v)
+      def set(val)
+        self.data = ip_to_int32(val)
       end
     end
 
@@ -121,7 +121,7 @@ module Lwes
           end
       
           def get;   self.data;     end
-          def set(v) self.data = v; end
+          def set(val) self.data = val; end
         end
       END
     end
@@ -139,26 +139,26 @@ module Lwes
         self.val = extract_value(val)
       end
       
-      def extract_key(v)
-        v[0]
+      def extract_key(val)
+        val[0]
       end
       
-      def extract_type(v)
-        Lwes::TYPE_TO_BYTE[v[1]]
+      def extract_type(val)
+        Lwes::TYPE_TO_BYTE[val[1]]
       end
       
-      def extract_value(v)
-        v[2]
+      def extract_value(val)
+        val[2]
       end
       
       def get
         [self.key, BYTE_TO_TYPE[self.vtype], self.val]
       end
 
-      def set(v)
-        self.key = extract_key(v)
-        self.vtype = extract_type(v)
-        self.val = extract_value(v)
+      def set(val)
+        self.key = extract_key(val)
+        self.vtype = extract_type(val)
+        self.val = extract_value(val)
       end
     end
 
@@ -180,9 +180,9 @@ module Lwes
         self.data
       end
       
-      def set(v)
+      def set(val)
         self.data = []
-        value.each do |attribute|
+        val.each do |attribute|
           self.data << attribute
         end
       end
