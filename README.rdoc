@@ -44,6 +44,11 @@ Here is a short example to create an event and send it off using udp
   
   # send it off with the emitter
   emitter.emit event
+  
+== Future works
+
+* Implement Listener
+* Better error handling
 
 == Contributing to lwes_pure
  
