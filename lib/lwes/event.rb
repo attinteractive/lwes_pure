@@ -1,11 +1,13 @@
 require 'bindata'
 require 'lwes/types'
 require 'lwes/helpers'
+require 'lwes/validation'
 require 'lwes/serialization'
 
 module Lwes
   # Represent a LWES event, can read from and write to IO objects
   class Event
+    include Lwes::Validation
     attr_accessor :name, :attributes
     
     # Creates a new {Lwes::Emitter}.
@@ -25,6 +27,7 @@ module Lwes
     # @param [IO] io The IO object to write to.
     # @return [Number] Number of bytes written to IO
     def write(io)
+      validate!
       serializer.write(io)
     end
 
@@ -33,6 +36,7 @@ module Lwes
     def read(io)
       serializer = Lwes::Serialization::Event.read(io)
       set_attributes_from_serializer(serializer)
+      validate!
     end
     
     # Read from an IO object
@@ -65,14 +69,9 @@ module Lwes
     end
     
     def set_attributes_from_serializer(serializer)
-      @name = serializer.name
+      @name = serializer.name.to_s
       @attributes = serializer.attributes.inject({}) do |hash, attribute|
         key, vtype, value = *attribute
-        # convert to real string
-        key = key.to_s
-        # convert BinData types to actual types
-        value = value.value
-
         hash[key] = [vtype, value]
         hash
       end

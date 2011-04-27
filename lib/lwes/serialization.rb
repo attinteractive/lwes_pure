@@ -29,7 +29,7 @@ module Lwes
       string :data, :initial_value => lambda { value }, :read_length => :len
 
       def get
-        self.data
+        self.data.to_s
       end
       
       def set(val)
@@ -42,7 +42,7 @@ module Lwes
       uint16 :len,  :initial_value => lambda { data.length }
       string :data, :initial_value => lambda { value }, :read_length => :len
 
-      def get;   self.data;     end
+      def get;   self.data.to_s;     end
       def set(val) self.data = val; end
     end
 
@@ -120,7 +120,7 @@ module Lwes
             self.data = value
           end
       
-          def get;   self.data;     end
+          def get;   self.data.collect{ |e| e ? e.value : nil };     end
           def set(val) self.data = val; end
         end
       END
@@ -152,7 +152,7 @@ module Lwes
       end
       
       def get
-        [self.key, BYTE_TO_TYPE[self.vtype], self.val]
+        [self.key.value, BYTE_TO_TYPE[self.vtype], self.val.value]
       end
 
       def set(val)
@@ -177,7 +177,7 @@ module Lwes
       end
 
       def get
-        self.data
+        self.data.collect{|e| e ? e.value : nil}
       end
       
       def set(val)
